@@ -15,18 +15,10 @@ except ModuleNotFoundError:
 from datetime import datetime
 from datetime import timedelta
 
-#aws_access_key_id = 'AKIA5SGHTEU6JGTCGHSM'
-#aws_secret_access_key = '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'
-
-
 #
 # Option 1: S3 client list of buckets with name and is creation date
 #
-s3 = boto3.client('s3')
-#s3 = boto3.client('s3')
-response = s3.list_buckets()['Buckets']
-for bucket in response:
-    print('Bucket name: {}, Created on: {}'.format(bucket['Name'], bucket['CreationDate']))
+
 
 
 cost = boto3.client('ce')
@@ -57,9 +49,17 @@ response = cost.get_cost_and_usage(
 
 print(response)
 
+#EC2 Tests
 ec2 = boto3.client('ec2')
 #instance = ec2.instance('i-0d91723c63ee95f90')
 
 
 response = ec2.describe_instances()
 print(response)
+
+#s3 Tests
+s3 = boto3.client('s3')
+#s3 = boto3.client('s3')
+response = s3.list_buckets()['Buckets']
+for bucket in response:
+    print('Bucket name: {}, Created on: {}'.format(bucket['Name'], bucket['CreationDate']))
